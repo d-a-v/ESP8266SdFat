@@ -78,7 +78,7 @@ namespace sdfat {
 #if defined(__AVR__) && FLASHEND < 0X8000
 // 32K AVR boards.
 #define SDFAT_FILE_TYPE 1
-#elif defined(__arm__) && !defined(ARDUINO_ARCH_RP2040)
+#elif defined(__arm__) && !defined(ARDUINO_ARCH_RP2040) && !defined(CORE_MOCK)
 // ARM boards usually have plenty of memory
 #define SDFAT_FILE_TYPE 3
 #else  // defined(__AVR__) && FLASHEND < 0X8000
@@ -216,7 +216,7 @@ typedef uint8_t SdCsPin_t;
 #elif defined(PLATFORM_ID)
 // Particle boards - use fcntl.h.
 #define USE_FCNTL_H 1
-#elif defined(__arm__)
+#elif defined(__arm__) && !defined(linux)
 // ARM gcc defines open flags.
 #define USE_FCNTL_H 1
 #elif defined(ESP32)
